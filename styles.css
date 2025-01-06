@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap');
+
+* {
+    background-color: hsl(13, 31%, 94%);
+    font-family: "Red Hat Text", serif;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+}
+
+ul {
+    list-style: none;
+}
+
+.attribution a {
+    font-weight: bold;
+    text-decoration: none;
+    color: hsl(12, 20%, 44%);
+    transition: all 1.5s;
+}
+
+.attribution a:hover {
+    color: hsl(159, 69%, 38%);
+}
+
+li img {
+    width: 325px;
+    border-radius: 20px;
+}
+
+.list_add {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.list_add button {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    translate: -50% -50%;
+}
