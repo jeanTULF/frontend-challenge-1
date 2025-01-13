@@ -112,6 +112,10 @@ li img {
     font-size: 18px;
 }
 
+aside {
+    width: 40%;
+}
+
 .cart { 
     background-color: hsl(20, 50%, 98%);
     padding: 20px;
@@ -122,7 +126,7 @@ li img {
 }
 
 .cart p {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     color: hsl(14, 86%, 42%);
 }
@@ -130,6 +134,7 @@ li img {
 .empty-img {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     width: 100%;
     color: hsl(7, 20%, 60%);
@@ -137,6 +142,6 @@ li img {
 }
 
 .empty-img img {
-    width: 60%;
+    width: 30%;
     align-self: center;
 }
