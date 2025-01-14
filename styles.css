@@ -113,16 +113,16 @@ li img {
 }
 
 aside {
-    width: 40%;
+    width: 25%;
 }
 
 .cart { 
     background-color: hsl(20, 50%, 98%);
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
 }
 
 .cart p {
@@ -143,5 +143,6 @@ aside {
 
 .empty-img img {
     width: 30%;
+    max-width: 160px;
     align-self: center;
 }
