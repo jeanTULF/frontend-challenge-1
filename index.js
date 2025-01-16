@@ -1,5 +1,5 @@
 let listItem;
-let listaDeProductos = document.getElementsByClassName('list');
+let listaDeProductos = document.querySelector('.list');
 
 
 fetch('data.json')
@@ -15,7 +15,7 @@ fetch('data.json')
               <p class="item_price">$<span>${price}</span></p>
             </div>
         `
+        listItem.innerHTML = content;
+        listaDeProductos.appendChild(listItem);
     });
-    listItem.innerHTML = content;
-    listaDeProductos.appendChild(listItem);
 })
