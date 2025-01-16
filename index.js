@@ -1,13 +1,21 @@
-let datos; 
+let listItem;
+let listaDeProductos = document.getElementsByClassName('list');
+
 
 fetch('data.json')
 .then( res => res.json())
 .then((data) => {
-    datos = data;
-    /* datos.map((numbers) => {
-        numbers.
-    }) */ /* esto esta mal */
-    let test = document.getElementById('test')
-    test.textContent = 'lol me la he cagao'
-    console.log(datos);
+    data.forEach(({name, price, category, image}) => {
+        listItem = document.createElement('li');
+        listItem.classList.add('list_item')
+        const content = `
+            <div class="item_details">
+              <p class="item_name">${category}</p>
+              <span class="item_description">${name}</span>
+              <p class="item_price">$<span>${price}</span></p>
+            </div>
+        `
+    });
+    listItem.innerHTML = content;
+    listaDeProductos.appendChild(listItem);
 })
