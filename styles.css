@@ -40,6 +40,12 @@ li img {
     border-radius: 20px;
 }
 
+.list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .list_add {
     display: flex;
     flex-direction: column;
@@ -95,12 +101,12 @@ li img {
     gap: 5px;
 }
 
-.item_name {
+.item_category {
     color: hsl(7, 20%, 60%);
     font-weight: 500;
 }
 
-.item_description {
+.item_name {
     color: hsl(13, 63%, 14%);
     font-weight: 600;
     font-size: 18px;
@@ -110,10 +116,6 @@ li img {
     color: hsl(14, 86%, 42%);
     font-weight: 600;
     font-size: 18px;
-}
-
-aside {
-    width: 25%;
 }
 
 .cart { 
