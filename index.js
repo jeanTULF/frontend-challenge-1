@@ -2,6 +2,8 @@ let listItem;
 let listaDeProductos = document.querySelector('.list');
 
 
+
+
 fetch('data.json')
 .then( res => res.json())
 .then((data) => {
@@ -27,13 +29,13 @@ fetch('data.json')
         `
         listItem.innerHTML = content;
         listaDeProductos.appendChild(listItem);
+        const addToCart = listItem.querySelector('.list_add-button');
+        console.log(addToCart);
+        //AddToCart function 
+
+        addToCart.addEventListener('click', () => {
+            addToCart.classList.add('active')
+        console.log(`Added to cart: ${name}`);
+        });
     });
 })
-
-
-
-// AddToCart function
-
-let addToCart = document.querySelector('.list_add-button')
-console.log(addToCart);
-/* addToCart.addEventListener('click', console.log('snlasnk')) */

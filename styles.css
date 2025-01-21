@@ -140,6 +140,11 @@ aside {
     color: hsl(14, 86%, 42%);
 }
 
+.active {
+    background-color: hsl(14, 86%, 42%);
+    color: hsl(20, 50%, 98%);
+}
+
 .empty-img {
     display: flex;
     flex-direction: column;
