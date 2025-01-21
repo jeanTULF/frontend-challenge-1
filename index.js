@@ -29,3 +29,11 @@ fetch('data.json')
         listaDeProductos.appendChild(listItem);
     });
 })
+
+
+
+// AddToCart function
+
+let addToCart = document.querySelector('.list_add-button')
+console.log(addToCart);
+/* addToCart.addEventListener('click', console.log('snlasnk')) */
