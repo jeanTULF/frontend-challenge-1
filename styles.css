@@ -134,7 +134,7 @@ aside {
     margin: 0 auto;
 }
 
-.cart p {
+.cart > p {
     font-size: 28px;
     font-weight: bold;
     color: hsl(14, 86%, 42%);
@@ -158,6 +158,44 @@ aside {
 .total {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: hsl(13, 63%, 14%);
+}
+
+#product-total {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.product-info {
+    border-bottom: 1px solid rgba(0,0,0,0.17);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info > svg {
+    width: 24px;
+    align-self: flex-end;
+}
+
+.product-info > svg:hover {
+    cursor: pointer;
+}
+
+.quantity {
+    color: hsl(14, 86%, 42%);
+    font-weight: 600;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.product-details {
+    display: flex;
+    gap: 20px;
 }
 
 .active {
