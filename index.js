@@ -12,7 +12,7 @@ let totalDeProductos = document.getElementById('product-number');
 fetch('data.json')
 .then( res => res.json())
 .then((data) => {
-    data.forEach(({name, price, category, image}) => {
+    data.forEach(({name, price, category, image, id}) => {
         listItem = document.createElement('li');
         listItem.classList.add('list_item')
         const imageUrl = image.desktop;
@@ -20,9 +20,9 @@ fetch('data.json')
             <div class="list_add">
             <img src=${imageUrl} alt=${category}>             
                 <button class="list_add-button">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20">
+                <g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/>
+                <path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>
                 <span>Add to Cart</span>
                 </button>
             </div>
@@ -35,30 +35,27 @@ fetch('data.json')
         listItem.innerHTML = content;
         listaDeProductos.appendChild(listItem);
         const addToCart = listItem.querySelector('.list_add-button');
-        //AddToCart function 
+
         
         function compra() {
-            productCart.push({name, price, image})
+            productCart.push({name, price, image, id})
         }
+        
 
         function actualizarCarrito() {
-            // Limpiar contenido actual
             productosCompra.innerHTML = '';
-        
-            // Recorrer cada producto en productCart
             productCart.forEach((producto, index) => {
-                // Crear los elementos necesarios
                 const productoContainer = document.createElement('div');
                 productoContainer.classList.add('product-item');
-        
-                // Crear el contenido HTML del producto
                 productoContainer.innerHTML = `
-                    <h2 class="product-name">${producto.name}</h2>
+                <div>
+                <h2 class="product-name">${producto.name}</h2>
                     <div class="product-details">
                         <p class="quantity">x1</p>
                         <p>@${producto.price.toFixed(2)}</p>
-                        <p>$${producto.price.toFixed(2)}</p>
+                        <p class="total-price">$${producto.price.toFixed(2)}</p>
                     </div>
+                </div>
                     <button class="remove-product" data-index="${index}">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.70711 8.29289C9.31658 7.90237 8.68342 7.90237 8.29289 8.29289C7.90237 8.68342 7.90237 9.31658 8.29289 9.70711L10.5858 12L8.29289 14.2929C7.90237 14.6834 7.90237 15.3166 8.29289 15.7071C8.68342 16.0976 9.31658 16.0976 9.70711 15.7071L12 13.4142L14.2929 15.7071C14.6834 16.0976 15.3166 16.0976 15.7071 15.7071C16.0976 15.3166 16.0976 14.6834 15.7071 14.2929L13.4142 12L15.7071 9.70711C16.0976 9.31658 16.0976 8.68342 15.7071 8.29289C15.3166 7.90237 14.6834 7.90237 14.2929 8.29289L12 10.5858L9.70711 8.29289Z" fill="#0F1729"></path>
@@ -66,8 +63,6 @@ fetch('data.json')
                         </svg>
                     </button>
                 `;
-        
-                // Agregar el producto al contenedor del carrito
                 productosCompra.appendChild(productoContainer);
             });
         
@@ -89,14 +84,6 @@ fetch('data.json')
             actualizarCarrito();
             console.log(productCart);
         });
-        /* if(productCart.length == 0) {
-            carritoVacio.classList.remove('hidden')
-            carritoLleno.classList.add('hidden')
-        } else {
-            carritoLleno.classList.remove('hidden')
-            carritoVacio.classList.add('hidden')
-        } */
-
     });
 })
 

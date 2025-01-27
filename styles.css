@@ -169,22 +169,39 @@ aside {
 }
 
 .product-info {
-    border-bottom: 1px solid rgba(0,0,0,0.17);
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
-.product-info > svg {
+.remove-product {
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.remove-product > svg {
     width: 24px;
     align-self: flex-end;
 }
 
-.product-info > svg:hover {
+.remove-product > svg:hover {
     cursor: pointer;
+}
+
+.product-item { 
+    border-bottom: 1px solid rgba(0,0,0,0.17);
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
 }
 
 .quantity {
     color: hsl(14, 86%, 42%);
+    font-weight: 600;
+}
+
+.total-price {
     font-weight: 600;
 }
 
