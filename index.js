@@ -34,6 +34,7 @@ fetch('data.json')
         `
         listItem.innerHTML = content;
         listaDeProductos.appendChild(listItem);
+        totalDeProductos.innerHTML = 0
         const addToCart = listItem.querySelector('.list_add-button');
 
         
@@ -67,13 +68,11 @@ fetch('data.json')
             });
         
             // Mostrar u ocultar la sección de carrito vacío
-            if (productCart.length === 0) {
-                carritoVacio.classList.remove('hidden');
-                carritoLleno.classList.add('hidden');
-            } else {
-                carritoVacio.classList.add('hidden');
-                carritoLleno.classList.remove('hidden');
-            }
+            const isCartEmpty = productCart.length === 0;
+            carritoVacio.classList.toggle('hidden', !isCartEmpty);
+            carritoLleno.classList.toggle('hidden', isCartEmpty);
+
+
         }
         
         addToCart.addEventListener('click', () => {
