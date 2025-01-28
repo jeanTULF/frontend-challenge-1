@@ -224,3 +224,7 @@ aside {
     display: none;
 }
 
+.styleAlert {
+    background-color: hsl(12, 20%, 44%);
+}
+

@@ -5,6 +5,7 @@ let carritoVacio = document.querySelector('.empty-img')
 let carritoLleno = document.querySelector('.cart-products')
 let productCart = [];
 let totalValue = 0;
+let itemQuantity = 0;
 let totalDeProductos = document.getElementById('product-number');
 
 
@@ -40,6 +41,7 @@ fetch('data.json')
         
         function compra() {
             productCart.push({name, price, image, id})
+            console.log(productCart.some(product => product.id === id))
         }
         
 
@@ -78,10 +80,21 @@ fetch('data.json')
         addToCart.addEventListener('click', () => {
             addToCart.classList.add('active')
             compra()
-            console.log(`Added to cart: ${name}`);
+            Swal.fire({
+                toast: true,
+                icon: 'success',
+                title: `Añadido al carrito: ${name}`,
+                position: 'bottom-right',
+                animation: true,
+                timer: 1500,
+                timerProgressBar: true,
+                showConfirmButton: false,
+                customClass: {
+                    popup: 'styleAlert',
+                },
+            })
             totalDeProductos.innerHTML = productCart.length;
             actualizarCarrito();
-            console.log(productCart);
         });
     });
 })
