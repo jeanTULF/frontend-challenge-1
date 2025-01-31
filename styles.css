@@ -172,6 +172,8 @@ aside {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    overflow: auto;
+    max-height: 325px;
 }
 
 .remove-product {
@@ -224,7 +226,4 @@ aside {
     display: none;
 }
 
-.styleAlert {
-    background-color: hsl(12, 20%, 44%);
-}
 

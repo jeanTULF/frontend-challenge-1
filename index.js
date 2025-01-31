@@ -7,6 +7,10 @@ let productCart = [];
 let totalValue = 0;
 let itemQuantity = 0;
 let totalDeProductos = document.getElementById('product-number');
+let totalCostoProductos = document.getElementById('product-total')
+function alertaAñadido() {
+    
+}
 
 
 
@@ -36,12 +40,24 @@ fetch('data.json')
         listItem.innerHTML = content;
         listaDeProductos.appendChild(listItem);
         totalDeProductos.innerHTML = 0
-        const addToCart = listItem.querySelector('.list_add-button');
+        const botonAñadir = listItem.querySelector('.list_add-button');
 
         
-        function compra() {
-            productCart.push({name, price, image, id})
-            console.log(productCart.some(product => product.id === id))
+        function añadirAlCarrito(product) {
+            const existingProduct = productCart.find(item => item.id === product.id);
+            
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                productCart.push({ ...product, quantity: 1 });
+            }
+            
+            actualizarCarrito();
+        }
+
+        function getTotalQuantityByItem(product) {
+            const item = productCart.find((p) => p.id === product.id);
+            return item ? item.quantity : 0;
         }
         
 
@@ -49,14 +65,15 @@ fetch('data.json')
             productosCompra.innerHTML = '';
             productCart.forEach((producto, index) => {
                 const productoContainer = document.createElement('div');
+                let totalPriceItem = producto.price * producto.quantity;
                 productoContainer.classList.add('product-item');
                 productoContainer.innerHTML = `
-                <div>
+                <div class="list-add">
                 <h2 class="product-name">${producto.name}</h2>
                     <div class="product-details">
-                        <p class="quantity">x1</p>
+                        <p class="quantity">x${producto.quantity}</p>
                         <p>@${producto.price.toFixed(2)}</p>
-                        <p class="total-price">$${producto.price.toFixed(2)}</p>
+                        <p class="total-price">$${totalPriceItem.toFixed(2)}</p>
                     </div>
                 </div>
                     <button class="remove-product" data-index="${index}">
@@ -68,18 +85,19 @@ fetch('data.json')
                 `;
                 productosCompra.appendChild(productoContainer);
             });
-        
             // Mostrar u ocultar la sección de carrito vacío
             const isCartEmpty = productCart.length === 0;
             carritoVacio.classList.toggle('hidden', !isCartEmpty);
             carritoLleno.classList.toggle('hidden', isCartEmpty);
+        }
 
-
+        function calcularTotal() {
+            return productCart.reduce((total, producto) => total + (producto.price * producto.quantity), 0).toFixed(2);
         }
         
-        addToCart.addEventListener('click', () => {
-            addToCart.classList.add('active')
-            compra()
+        botonAñadir.addEventListener('click', () => {
+            const producto = { name, price, image, id, quantity: 1 };
+            añadirAlCarrito(producto);
             Swal.fire({
                 toast: true,
                 icon: 'success',
@@ -94,6 +112,7 @@ fetch('data.json')
                 },
             })
             totalDeProductos.innerHTML = productCart.length;
+            totalCostoProductos.innerHTML = calcularTotal()
             actualizarCarrito();
         });
     });
