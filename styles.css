@@ -75,6 +75,47 @@ li img {
     transition: all 0.3s;
 }
 
+.list_quantity-button {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    background-color: hsl(14, 86%, 42%);
+    padding: 15px 0;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px hsl(12, 20%, 44%) solid;
+    color: hsl(20, 50%, 98%);
+    outline: none;
+    transition: all 0.3s;
+}
+
+#decrement-qty, #increment-qty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px #fff solid;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+
+#decrement-qty:hover, #increment-qty:hover {
+    cursor: pointer;
+    background-color: #fff;
+    color: hsl(14, 86%, 42%);
+}
+
+#decrement-qty:hover svg path, 
+#increment-qty:hover svg path {
+    transition: fill 0.2s ease;
+    fill: hsl(14, 86%, 42%); 
+}
+
+
 .list_add-button svg {
     color: hsl(14, 86%, 42%);
 }
@@ -224,6 +265,25 @@ aside {
 
 .hidden {
     display: none;
+}
+
+/* 🖥️ Pantallas medianas (tablets) - 2 columnas */
+@media (max-width: 1200px) {
+    .list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 📱 Pantallas pequeñas (móviles) - 1 columna */
+@media (max-width: 768px) {
+    .list {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    main {
+        flex-direction: column;
+    }
 }
 
 
