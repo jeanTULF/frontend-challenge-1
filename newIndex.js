@@ -58,14 +58,47 @@ function actualizarCantidadTotal() {
     totalDeProductos.innerHTML = totalItems;
 }
 
+function aumentarCantidad(productId) {
+    const productoEnCarrito = productCart.find(product => product.id === productId);
+    if (productoEnCarrito) {
+        productoEnCarrito.quantity += 1;
+    }
+    actualizarCarrito();
+}
+
+function disminuirCantidad(productId) {
+    const productoEnCarrito = productCart.find(product => product.id === productId);
+    if (productoEnCarrito) {
+        productoEnCarrito.quantity -= 1;
+        if (productoEnCarrito.quantity <= 0) {
+            productCart = productCart.filter(product => product.id !== productId);
+        }
+    }
+    actualizarCarrito();
+}
+
+function mostrarAlerta(tipo, mensaje, posicion = 'bottom-right') {
+    Swal.fire({
+        toast: true,
+        icon: tipo,
+        title: mensaje,
+        position: posicion,
+        animation: true,
+        timer: 1500,
+        timerProgressBar: true,
+        showConfirmButton: false,
+        customClass: {
+            popup: 'styleAlert',
+        },
+    });
+}
+
 function actualizarCarrito() {
     productosCompra.innerHTML = '';
     productCart.forEach((producto, index) => {
         const productoContainer = document.createElement('div');
         let totalPriceItem = producto.price * producto.quantity;
-        productoContainer.classList.add('product-item');
-
-        
+        productoContainer.classList.add('product-item');  
         // TODO: cambio de click en el boton en vez de svg
         productoContainer.innerHTML = `
         <div class="list-add">
@@ -97,9 +130,8 @@ function actualizarCarrito() {
 
 document.addEventListener('click', (e) => {
     const buttonClicked = e.target.closest('.list_add-button');
-
     if(buttonClicked) {
-        const productContainer = buttonClicked.closest('.list_add');  
+    const productContainer = buttonClicked.closest('.list_add');  
     buttonClicked.style.display = 'none';
     const addButton = document.createElement('button');
     addButton.classList.add('list_quantity-button');
@@ -119,19 +151,7 @@ document.addEventListener('click', (e) => {
     productContainer.appendChild(addButton);
         const producto = JSON.parse(buttonClicked.dataset.product);
         añadirAlCarrito(producto);
-    Swal.fire({
-        toast: true,
-        icon: 'success',
-        title: `Añadido al carrito: ${producto.name}`,
-        position: 'bottom-right',
-        animation: true,
-        timer: 1500,
-        timerProgressBar: true,
-        showConfirmButton: false,
-        customClass: {
-            popup: 'styleAlert',
-        },
-    })
+    mostrarAlerta('success', `Añadido al carrito: ${producto.name}`)
     totalDeProductos.innerHTML = productCart.length;
     totalCostoProductos.innerHTML = calcularTotal()
     actualizarCarrito();
@@ -143,20 +163,20 @@ document.addEventListener('click', (e) => {
         const index = e.target.closest('.remove-product').dataset.index;
         const productoEliminado = productCart[index];
         productCart.splice(index, 1);
-        Swal.fire({
-            toast: true,
-            icon: 'info',
-            title: `Producto eliminado: ${productoEliminado.name}`,
-            position: 'top-right',
-            animation: true,
-            timer: 1500,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            customClass: {
-                popup: 'styleAlert',
-            },
-        });
+        mostrarAlerta('info', `Producto eliminado: ${productoEliminado.name}`)
         actualizarCarrito();
+    }
+
+    if (e.target.closest('#increment-qty')) {
+        const productContainer = e.target.closest('.list_add');
+    const productId = JSON.parse(productContainer.querySelector('.list_add-button').dataset.product).id;
+        aumentarCantidad(productId);
+    }
+
+    if (e.target.closest('#decrement-qty')) {
+        const productContainer = e.target.closest('.list_add');
+    const productId = JSON.parse(productContainer.querySelector('.list_add-button').dataset.product).id;
+        disminuirCantidad(productId);
     }
 });
 
