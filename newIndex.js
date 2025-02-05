@@ -9,6 +9,9 @@ let itemQuantity = 0;
 let totalDeProductos = document.getElementById('product-number');
 let totalCostoProductos = document.getElementById('product-total')
 
+
+totalDeProductos.innerHTML = 0
+
 async function obtenerProductos() {
     try {
         const response = await fetch('data.json');
