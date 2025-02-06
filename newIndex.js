@@ -28,6 +28,7 @@ function renderizarProductos(productos) {
         listItem = document.createElement('li');
         let imageUrl = producto.image
         listItem.classList.add('list_item')
+        listItem.setAttribute('data-id', producto.id);
         const content = `
             <div class="list_add">
                 <img src=${imageUrl.desktop} alt=${producto.category}>             
@@ -69,11 +70,15 @@ function aumentarCantidad(productId) {
     actualizarCarrito();
 }
 
-function disminuirCantidad(productId) {
+function disminuirCantidad(productId, e) {
     const productoEnCarrito = productCart.find(product => product.id === productId);
     if (productoEnCarrito) {
         productoEnCarrito.quantity -= 1;
         if (productoEnCarrito.quantity <= 0) {
+            const buttonClicked = e.target.closest('.list_quantity-button');
+            const addButton = productContainer.querySelector('.list_add-button'); 
+            buttonClicked.style.display = 'none';
+            addButton.style.display = 'block'
             productCart = productCart.filter(product => product.id !== productId);
         }
     }
@@ -179,7 +184,7 @@ document.addEventListener('click', (e) => {
     if (e.target.closest('#decrement-qty')) {
         const productContainer = e.target.closest('.list_add');
     const productId = JSON.parse(productContainer.querySelector('.list_add-button').dataset.product).id;
-        disminuirCantidad(productId);
+        disminuirCantidad(productId, e);
     }
 });
 
