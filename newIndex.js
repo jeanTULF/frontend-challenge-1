@@ -76,6 +76,7 @@ function disminuirCantidad(productId, e) {
         productoEnCarrito.quantity -= 1;
         if (productoEnCarrito.quantity <= 0) {
             const buttonClicked = e.target.closest('.list_quantity-button');
+            const productContainer = buttonClicked.closest('.list_item');
             const addButton = productContainer.querySelector('.list_add-button'); 
             buttonClicked.style.display = 'none';
             addButton.style.display = 'block'
@@ -137,6 +138,9 @@ function actualizarCarrito() {
 
 
 document.addEventListener('click', (e) => {
+
+    // * Crear nuevo boton para gestionar cantidades 
+    
     const buttonClicked = e.target.closest('.list_add-button');
     if(buttonClicked) {
     const productContainer = buttonClicked.closest('.list_add');  
@@ -165,21 +169,36 @@ document.addEventListener('click', (e) => {
     actualizarCarrito();
     }
     
-    
+    // * Eliminar producto del carrito
 
     if (e.target.closest('.remove-product')) {
         const index = e.target.closest('.remove-product').dataset.index;
         const productoEliminado = productCart[index];
-        productCart.splice(index, 1);
-        mostrarAlerta('info', `Producto eliminado: ${productoEliminado.name}`)
-        actualizarCarrito();
+        if (productoEliminado) {
+            productCart = productCart.filter((item, i) => i != index);
+            mostrarAlerta('info', `Producto eliminado: ${productoEliminado.name}`);
+            actualizarCarrito();
+            const productElement = document.querySelector(`.list_item[data-id="${productoEliminado.id}"]`);
+
+            if (productElement) {
+                const addButton = productElement.querySelector('.list_add-button');
+                const quantityButton = productElement.querySelector('.list_quantity-button');
+
+                if (quantityButton) quantityButton.remove(); 
+                if (addButton) addButton.style.display = 'flex';
+            }
+        }
     }
+
+    // * Agregar producto al carrito
 
     if (e.target.closest('#increment-qty')) {
         const productContainer = e.target.closest('.list_add');
     const productId = JSON.parse(productContainer.querySelector('.list_add-button').dataset.product).id;
         aumentarCantidad(productId);
     }
+
+    // * Reducir producto carrito
 
     if (e.target.closest('#decrement-qty')) {
         const productContainer = e.target.closest('.list_add');
