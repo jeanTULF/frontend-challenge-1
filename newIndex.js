@@ -7,7 +7,8 @@ let productCart = [];
 let totalValue = 0;
 let itemQuantity = 0;
 let totalDeProductos = document.getElementById('product-number');
-let totalCostoProductos = document.getElementById('product-total')
+let totalCostoProductos = document.getElementById('product-total');
+let confirmBtn = document.getElementById('confirmBtn');
 
 
 totalDeProductos.innerHTML = 0
@@ -140,7 +141,7 @@ function actualizarCarrito() {
 document.addEventListener('click', (e) => {
 
     // * Crear nuevo boton para gestionar cantidades 
-    
+
     const buttonClicked = e.target.closest('.list_add-button');
     if(buttonClicked) {
     const productContainer = buttonClicked.closest('.list_add');  
@@ -210,3 +211,45 @@ document.addEventListener('click', (e) => {
 function calcularTotal() {
     return productCart.reduce((acc, producto) => acc + (producto.price * producto.quantity), 0).toFixed(2);
 }
+
+confirmBtn.addEventListener('click', () => {
+    let cartItems = productCart.map((item) =>{
+        let totalPriceItem = item.price * item.quantity;
+    return`
+            <div class="confirmed-list">
+                <h2 class="product-name">${item.name}</h2>
+                    <div class="product-details">
+                    <img class="product-img" src=${item.image.thumbnail} alt="">
+                        <p class="quantity">x${item.quantity}</p>
+                        <p>@${item.price.toFixed(2)}</p>
+                        <p class="total-price">$${totalPriceItem.toFixed(2)}</p>
+                    </div>
+            </div>
+            `
+    }).join("");
+    Swal.fire({
+        title: "Order Confirmed",
+        html: `
+        <div class="swal-cart-container">
+        ${cartItems}
+        <span class="total">
+                Order total
+                <span id="swal-cart-total"></span>
+            </span>
+        </div>
+        `,
+        didOpen: () => {
+            let cartTotalElement = document.getElementById('swal-cart-total');
+            if (cartTotalElement) {
+                cartTotalElement.innerHTML = `$${calcularTotal()}`;
+            }
+        },
+        icon: "success",
+        allowOutsideClick: false,
+        confirmButtonText: "Start New Order",
+    }).then((result) => {
+        if(result.isConfirmed) {
+            window.location.reload();
+        }
+    });
+})

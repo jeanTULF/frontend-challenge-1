@@ -304,6 +304,20 @@ aside {
     display: none;
 }
 
+.swal-cart-container {
+    display: flex;
+    flex-direction: column;
+    background-color: hsl(13, 31%, 94%);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.product-img {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+}
+
 /* 🖥️ Pantallas medianas (tablets) - 2 columnas */
 @media (max-width: 1200px) {
     .list {
