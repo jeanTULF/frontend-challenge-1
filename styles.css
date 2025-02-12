@@ -207,6 +207,56 @@ aside {
     align-items: center;
     font-size: 1rem;
     color: hsl(13, 63%, 14%);
+    
+}
+
+.confirm-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 20px 0;
+    color: hsl(13, 63%, 14%);
+}
+
+.confirmed-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.cart-product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.cart-product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    gap: 10px;
+}
+
+.cart-product-info p:last-child {
+    margin-left: auto;
+}
+
+.cart-product-name {
+    align-self: flex-start;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+#swal-cart-total {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cart-total-price {
+    align-self: flex-end;
+    font-weight: 600;
 }
 
 .info-delivery {
@@ -220,6 +270,16 @@ aside {
 
 .bold {
     font-weight: 600;
+}
+
+.confirm {
+    background-color: hsl(14, 86%, 42%);
+    padding: 14px;
+    border: none;
+    border-radius: 20px;
+    color: hsl(20, 50%, 98%);
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 
 #product-total {
@@ -305,8 +365,7 @@ aside {
 }
 
 .swal-cart-container {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
     background-color: hsl(13, 31%, 94%);
     padding: 10px 20px;
     border-radius: 20px;

@@ -217,13 +217,15 @@ confirmBtn.addEventListener('click', () => {
         let totalPriceItem = item.price * item.quantity;
     return`
             <div class="confirmed-list">
-                <h2 class="product-name">${item.name}</h2>
-                    <div class="product-details">
-                    <img class="product-img" src=${item.image.thumbnail} alt="">
-                        <p class="quantity">x${item.quantity}</p>
-                        <p>@${item.price.toFixed(2)}</p>
-                        <p class="total-price">$${totalPriceItem.toFixed(2)}</p>
-                    </div>
+            <img class="product-img" src=${item.image.thumbnail} alt="">
+                <div class="cart-product-details">
+                    <h2 class="cart-product-name">${item.name}</h2>
+                        <div class="cart-product-info">
+                            <p class="quantity">x${item.quantity}</p>
+                            <p>@${item.price.toFixed(2)}</p>
+                            <p class="cart-total-price">$${totalPriceItem.toFixed(2)}</p>
+                            </div>
+                </div>
             </div>
             `
     }).join("");
@@ -232,7 +234,7 @@ confirmBtn.addEventListener('click', () => {
         html: `
         <div class="swal-cart-container">
         ${cartItems}
-        <span class="total">
+        <span class="confirm-total">
                 Order total
                 <span id="swal-cart-total"></span>
             </span>
@@ -243,6 +245,9 @@ confirmBtn.addEventListener('click', () => {
             if (cartTotalElement) {
                 cartTotalElement.innerHTML = `$${calcularTotal()}`;
             }
+        },
+        customClass: {
+            confirmButton: "confirm"
         },
         icon: "success",
         allowOutsideClick: false,
